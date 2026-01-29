@@ -1,0 +1,52 @@
+<odoo>
+    <record id="view_asset_tree" model="ir.ui.view">
+        <field name="name">asset.asset.tree</field>
+        <field name="model">asset.asset</field>
+        <field name="arch" type="xml">
+            <tree string="Danh sách tài sản" decoration-danger="status=='maintenance'" decoration-success="status=='available'">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="type"/>
+                <field name="status" widget="badge"/> </tree>
+        </field>
+    </record>
+
+    <record id="view_asset_form" model="ir.ui.view">
+        <field name="name">asset.asset.form</field>
+        <field name="model">asset.asset</field>
+        <field name="arch" type="xml">
+            <form string="Tài sản">
+                <header>
+                    <field name="status" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="Ví dụ: Máy chiếu Sony..."/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_asset_management" model="ir.actions.act_window">
+        <field name="name">Quản lý Tài sản</field>
+        <field name="res_model">asset.asset</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_asset_management"
+              name="Tài sản"
+              parent="menu_asset_meeting_root"
+              action="action_asset_management"
+              sequence="2"/>
+</odoo>
